@@ -1,3 +1,4 @@
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pro/core/app_data.dart';
@@ -6,19 +7,29 @@ import 'package:pro/src/controller/product_controller.dart';
 import 'package:pro/src/view/widget/product_grid_view.dart';
 import 'package:pro/src/view/widget/list_item_selector.dart';
 
-enum AppbarActionType { leading, trailing }
+enum AppbarActionType {  trailing }
 
 final ProductController controller = Get.put(ProductController());
 
-class AllProductScreen extends StatelessWidget {
+class AllProductScreen extends StatefulWidget {
   const AllProductScreen({Key? key}) : super(key: key);
 
-  Widget appBarActionButton(AppbarActionType type) {
-    IconData icon = Icons.ac_unit_outlined;
+  @override
+  State<AllProductScreen> createState() => _AllProductScreenState();
+}
 
-    if (type == AppbarActionType.trailing) {
-      icon = Icons.search;
-    }
+class _AllProductScreenState extends State<AllProductScreen> {
+  Widget appBarActionButton(AppbarActionType type) {
+    TextEditingController textController = TextEditingController();
+
+
+
+
+    // IconData icon = Icons.ac_unit_outlined;
+    //
+    // if (type == AppbarActionType.trailing) {
+    //   icon = Icons.search;
+    // }
 
     return Container(
       margin: const EdgeInsets.all(8),
@@ -26,13 +37,23 @@ class AllProductScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: AppColor.lightGrey,
       ),
-      child: IconButton(
-        padding: const EdgeInsets.all(8),
-        constraints: const BoxConstraints(),
-        onPressed: () {
-        },
-        icon: Icon(icon, color: Colors.black),
+      child:  AnimSearchBar(
+        width: 300,
+        textController: textController,
+        onSuffixTap: () {
+          setState(() {
+            textController.clear();
+          });
+        }, onSubmitted: (String ) {  },
       ),
+
+      // child: IconButton(
+      //   padding: const EdgeInsets.all(8),
+      //   constraints: const BoxConstraints(),
+      //   onPressed: () {
+      //   },
+      //   // icon: Icon(icon, color: Colors.black),
+      // ),
     );
   }
 
@@ -45,7 +66,7 @@ class AllProductScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              appBarActionButton(AppbarActionType.leading),
+              // appBarActionButton(AppbarActionType.leading),
               appBarActionButton(AppbarActionType.trailing),
             ],
           ),
