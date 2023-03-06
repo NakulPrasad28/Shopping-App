@@ -27,9 +27,9 @@ class _AllProductScreenState extends State<AllProductScreen> {
 
     // IconData icon = Icons.ac_unit_outlined;
     //
-    // if (type == AppbarActionType.trailing) {
+    if (type == AppbarActionType.trailing) {
     //   icon = Icons.search;
-    // }
+    }
 
     return Container(
       margin: const EdgeInsets.all(8),
